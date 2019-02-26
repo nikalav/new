@@ -121,18 +121,12 @@ nav {
 }
 
 nav a {
+    display: block;
 	text-decoration: none;
 	color: gray;
 	margin: 0 10px;
 	line-height: 70px;
 	font-size: 2vw;
-}
-
-label {
-	margin: 0 40px 0 0;
-	font-size: 26px;
-	line-height: 70px;
-	display: none;
 }
 
 .topimg {
@@ -141,37 +135,6 @@ label {
 	left: 0;
 	z-index: 1000;
 }
-
-#toggle {
-	display: none;
-}
-
-@media only screen and(max-width:600px) {
-	label {
-		display: block;
-		cursor: pointer;
-	}
-
-	nav {
-		text-align: center;
-		width: 100%;
-		display: none;
-
-	}
-
-	nav a {
-		display: block;
-		border-bottom: 1px solid #EAEAEB;
-		margin: 0;
-	}
-
-	#toggle:checked + nav {
-		display: block;
-	}
-}
-
-
-
 
 /*// Animating Logo //*/
 
