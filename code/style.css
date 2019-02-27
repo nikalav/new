@@ -2,18 +2,23 @@
 
 .close-btn {
 	float: right;
+	border-radius: 1em;
+	border-color: grey;
+	background-color: #97C416;
+	cursor: pointer;
+	padding: 5px;
 }
 
-button {
+.seeMore {
 	border-radius: 1em;
-	border-color: #846a6a;
-	background-color: #cebbb6;
+	background-color: #97C416;
 	cursor: pointer;
-
+	margin-left: 40%;
+	margin-right: 30%;
+	padding: 5px;
 }
 .model-content img {
-	width: auto;
-	float: right;
+	width: 100%;
 }
 
 .model-bg {
@@ -69,7 +74,6 @@ article {
 	margin-left: 1em;
 	position: relative;
 	padding: 1em;
-	border-radius: 40px;
 	border-color: #000;
 	background-color: #fff;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

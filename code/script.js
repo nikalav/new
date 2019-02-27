@@ -38,10 +38,25 @@ function displayLegoData(brickArt){
 	}
 	let clone = template.cloneNode(true);
 	clone.querySelector("h2").textContent = brickArt.gsx$title.$t;
-    const img = brickArt.gsx$imagename.$t;
-	clone.querySelector("img").setAttribute("src", "photos/"+img+".jpg");
+
+
+	const img = brickArt.gsx$imagename.$t;
+	clone.querySelector("img").setAttribute("src", "photos/"+img+".png");
+	clone.querySelector("button").addEventListener("click", ()=>showDetails((brickArt)));
+//	clone.querySelector("p").textContent = brickArt.gsx$description.$t;
 
 	section.appendChild(clone);
+
+}
+//card flip
+function showDetails(brickArt) {
+	console.log(brickArt);
+
+	modal.querySelector("img").setAttribute("src", "photos/"+brickArt.gsx$imagename.$t+".png");
+
+	modal.querySelector("h2").textContent = brickArt.gsx$title.$t;
+	modal.classList.remove("hide");
+
 
 }
 
@@ -55,16 +70,6 @@ function filter(cat){
                     section.classList.add('hide');
                 }
             })
-}
-
-//flip info
-function showDetails(brickArt) {
-	console.log(brickArt);
-
-	modal.querySelector("img").setAttribute("src", "photos/"+img+".jpg");
-	
-	modal.querySelector("h2").textContent = brickArt.gsx$title.$t;
-	modal.classList.remove("hide");
 }
 
 
