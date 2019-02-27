@@ -1,3 +1,4 @@
+
 //select DOM elements
 const template = document.querySelector("#setTemplate").content;
 const main = document.querySelector("main");
@@ -66,3 +67,31 @@ function home() {
 }
 
 loadJSON(link);
+=======
+//select DOM elements
+const nav = document.querySelector("nav");
+const allLink = document.querySelector("#all");
+const modal = document.querySelector(".model-bg");
+const closeBtn = document.querySelector(".close-btn");
+
+
+
+//add global eventListeners
+allLink.addEventListener("click", () => filter("all"));
+modal.addEventListener("click", () => modal.classList.add("hide"));
+closeBtn.addEventListener("click", () => modal.classList.add("hide"));
+
+
+
+//function for showing only the category clicked
+function filter(cat){
+   //console.log(cat);
+   document.querySelectorAll("main section").forEach(section => {
+                if (section.id == cat) {
+                    section.classList.remove('hide');
+                } else {
+                    section.classList.add('hide');
+                }
+            })
+}
+

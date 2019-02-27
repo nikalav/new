@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'oswaldregular';
     src: url('fonts/oswald-regular-webfont.eot');
@@ -17,6 +18,35 @@
 		margin:0;
 	}
 
+.close-btn {
+	float: right;
+	border-radius: 1em;
+	border-color: grey;
+	background-color: #97C416;
+	cursor: pointer;
+	padding: 5px;
+}
+button {
+	border-radius: 1em;
+	background-color: #97C416;
+	cursor: pointer;
+	margin-left: 40%;
+	margin-right: 30%;
+	padding: 5px;
+}
+.model-content img {
+	max-width: 80%;
+}
+
+.model-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, .8);
+}
+
 	.about {
 		display:block;
 	}
@@ -29,9 +59,6 @@
 		margin-right:5vw;
 	}
 
-	.about {
-		display:none;
-	}
 }
 
 button {
@@ -59,6 +86,7 @@ button {
 .mainMenuSection img {
 	width: 100%;
 }
+
 
 .hide { display: none }
 
@@ -96,9 +124,98 @@ button {
 	border-radius: 2em;
 	background-color:black;
 	color:white;
+  
+.hide {
+	display: none;
+}
+/*//Styling burger menu //*/
+.nav{
+    border-bottom: 1px solid #EAEAEB;
+    text-align: right;
+    height: 70px;
+    line-height: 70px;
+}
+.menu{
+    margin: 0 30px 0 0;
+}
+.menu a{
+    text-decoration: none;
+    color: gray;
+    margin: 0 10px;
+    line-height: 70px;
+}
+label {
+    margin: 0 40px 0 0;
+    font-size: 26px;
+    line-height: 70px;
+    display: none;
+    width: 26px;
+}
+#toggle {
+display: none;}
+
+@media only screen and (max-width: 500px) {
+    .nav{
+        text-align: left;
+    }
+    label {
+        display: block;
+        cursor: pointer;
+    }
+    .menu{
+        text-align: center;
+        width: 100%;
+        display: none;
+    }
+    .menu a{
+        display: block;
+        border-bottom: 1px solid #EAEAEB;
+        margin: 0;
+    }
+    #toggle:checked + .menu{
+        display: block;
+    }
 }
 
+
+
+
+/*// Styling the navigation bar //*/
+nav {
+	margin: 0px 30px 0 0;
+
+}
+
+nav a {
+    display: block;
+	text-decoration: none;
+	color: gray;
+	margin: 0 10px;
+	line-height: 70px;
+	font-size: 3vw;
+    text-align: center;
+}
+
+
 /*// Animating Logo //*/
+
+:root {
+	--topMargin: 7vw;
+}
+
+@media (max-width:850px) {
+	.scaleLogo {
+		transform: scale(0.5) !important;
+	}
+
+}
+
+@media (max-width:1200px) {
+	.scaleLogo {
+		transform: scale(0.8)
+	}
+}
+
 .logoWrapper {
 	float: left;
 	max-width: 100%;
