@@ -65,5 +65,4 @@ function home() {
 	while (main.firstChild) main.firstChild.remove(); // remove all the content entries, as they are not on the home page
 }
 
-document.querySelectorAll(".mainMenuSection").forEach(menuSection => menuSection.classList.remove("hide")); // show all the tiles in the tile menu
 loadJSON(link);
