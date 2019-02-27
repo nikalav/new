@@ -27,20 +27,20 @@
 				<img class="yellowBlock brick" src="img/red_block.png">
 			</div>
 		</div>
-		<button class="topMenuPosition topMenuSelected">Home</button>
-		<button class="topMenuPosition" onclick="changeCategory('Creature')">Creatures</button>
-		<button class="topMenuPosition" onclick="changeCategory('Aircraft')">Aircraft</button>
-		<button class="topMenuPosition" onclick="changeCategory('Vehicle')">Vehicles</button>
-		<button class="topMenuPosition" onclick="changeCategory('Buildings')">Buildings</button>
-		<button class="topMenuPosition" onclick="showAbout()">About Us</button>
+		<button id="menuHome" class="topMenuPosition topMenuSelected" data-category="Home" onclick="home()">Home</button>
+		<button id="menuCreature" class="topMenuPosition" data-category="Creature" onclick="changeCategory('Creature')">Creatures</button>
+		<button id="menuAircraft" class="topMenuPosition" data-category="Aircraft" onclick="changeCategory('Aircraft')">Aircraft</button>
+		<button id="menuVehicle" class="topMenuPosition" data-category="Vehicle" onclick="changeCategory('Vehicle')">Vehicles</button>
+		<button id="menuBuildings" class="topMenuPosition" data-category="Buildings" onclick="changeCategory('Buildings')">Buildings</button>
+		<button id="menuAbout" class="topMenuPosition" data-category="About" onclick="showAbout()">About Us</button>
 	</nav>
 
 	<nav class="mainMenu">
-		<div class="mainMenuSection" onclick="changeCategory('Creature')"><div class="gradient bgColorGreen"></div><img src='img/creatures_graphic_txt.png'/></div>
-		<div class="mainMenuSection" onclick="changeCategory('Aircraft')"><div class="gradient bgColorBlue"></div><img src='img/aircraft_graphic_txt.png'/></div>
-		<div class="mainMenuSection" onclick="changeCategory('Vehicle')"><div class="gradient bgColorRed"></div><img src='img/vehicles_graphic_txt.png'/></div>
-		<div class="mainMenuSection" onclick="changeCategory('Buildings')"><div class="gradient bgColorYellow"></div><img src='img/buildings_graphic_txt.png'/></div>
-		<div class="mainMenuSection about" onclick="showAbout()"><div class="gradient bgColorGray"></div><img src='img/about_graphic_txt.png'/></div>
+		<div class="mainMenuSection" data-category="Creature" onclick="changeCategory('Creature')"><div class="gradient bgColorGradientCreature"></div><img src='img/creatures_graphic_txt.png'/></div>
+		<div class="mainMenuSection" data-category="Aircraft" onclick="changeCategory('Aircraft')"><div class="gradient bgColorGradientAircraft"></div><img src='img/aircraft_graphic_txt.png'/></div>
+		<div class="mainMenuSection" data-category="Vehicle" onclick="changeCategory('Vehicle')"><div class="gradient bgColorGradientVehicle"></div><img src='img/vehicles_graphic_txt.png'/></div>
+		<div class="mainMenuSection" data-category="Buildings" onclick="changeCategory('Buildings')"><div class="gradient bgColorGradientBuildings"></div><img src='img/buildings_graphic_txt.png'/></div>
+		<div class="mainMenuSection about" data-category="About" onclick="showAbout()"><div class="gradient bgColorGradientAbout"></div><img src='img/about_graphic_txt.png'/></div>
 	</nav>
 
 	<main>
@@ -48,15 +48,15 @@
 
 	<template id="setTemplate">
 		<article>
-			<section class="front over">
+			<section class="over">
 				<h2 class="setTitleFront">TITLE</h2>
-				<img class="setPicture" src="photos/">
-				<button>See more</button>
+				<img class="setPicture" src="">
+				<div class="control" onclick="flip(this.parentElement.parentElement)">Learn More</div>
 			</section>	
-			<section class="back under">
+			<section class="under">
 				<h2 class="setTitleBack">TITLE</h2>
 				<p class="setDescription">DESCRIPTION</p>
-				<button>Back</button>
+			    <div class="control" onclick="flip(this.parentElement.parentElement)">Back</div>
 			</section>	
 		</article>
 	</template>

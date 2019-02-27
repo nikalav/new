@@ -1,10 +1,6 @@
 //select DOM elements
 const template = document.querySelector("#setTemplate").content;
 const main = document.querySelector("main");
-const nav = document.querySelector("nav");
-const allLink = document.querySelector("#all");
-const modal = document.querySelector(".model-bg");
-const closeBtn = document.querySelector(".close-btn");
 
 //make shortcuts to API endpoints
 const link = "https://spreadsheets.google.com/feeds/list/1RVK5ksJDyymK5QzZwrJ2KYxq5KKuAsBbbH0gmk9czps/1/public/values?alt=json";
@@ -23,11 +19,20 @@ function displayLegoData(legoSet) {
 	newSet.querySelector('.setTitleBack').textContent = legoSet.gsx$title.$t;
 	newSet.querySelector('.setPicture').src = "photos/" + legoSet.gsx$imagename.$t + ".jpg";
 	newSet.querySelector("p").textContent = legoSet.gsx$description.$t;
+	newSet.querySelectorAll(".control").forEach(control => control.classList.add("bgColorLinear" + legoSet.gsx$category.$t));
 	main.appendChild(newSet);
 }
 
 //function for showing only the clicked category
 function changeCategory(cat) { 
+	document.querySelectorAll(".topMenuPosition").forEach(menuPosition => {
+		if (menuPosition.dataset.category == cat) menuPosition.classList.add("topMenuSelected") 
+		else menuPosition.classList.remove("topMenuSelected")
+	});
+	document.querySelectorAll(".mainMenuSection").forEach(menuSection => {
+		if (menuSection.dataset.category == cat) menuSection.classList.remove("hide") 
+		else menuSection.classList.add("hide")
+	});
 	while (main.firstChild) main.firstChild.remove();
     database.forEach(legoSet => { if (legoSet.gsx$category.$t == cat) displayLegoData(legoSet) });
 }
@@ -49,6 +54,15 @@ function flip(article) {
 		currentBack.classList.remove("under");
 	});
 	currentFront.classList.add("turnDissapearC");
+}
+
+function home() {
+	document.querySelectorAll(".mainMenuSection").forEach(menuSection => menuSection.classList.remove("hide"));
+	document.querySelectorAll(".topMenuPosition").forEach(menuPosition => {
+		if (menuPosition.dataset.category == 'Home') menuPosition.classList.add("topMenuSelected") 
+		else menuPosition.classList.remove("topMenuSelected")
+	});
+	while (main.firstChild) main.firstChild.remove();
 }
 
 loadJSON(link);

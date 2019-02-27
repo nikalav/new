@@ -36,17 +36,8 @@
 
 }
 
-.close-btn {
-	float: right;
-}
-
 button {
 	cursor: pointer;
-}
-
-header {
-	min-height: 100px;
-	height: 230px;
 }
 
 h1 {
@@ -56,34 +47,8 @@ h1 {
 	font-size: 50px;
 }
 
-h2 {
-	text-align: center;
-}
-
-img {
-	width: 100%;
-}
-
-
-/*// Styling the navigation bar //*/
-
 :root {
 	--topMargin: 7vw;
-}
-
-nav {
-	margin: 0px 30px 0 0;
-
-}
-
-nav a {
-    display: block;
-	text-decoration: none;
-	color: gray;
-	margin: 0 10px;
-	line-height: 70px;
-	font-size: 2vw;
-
 }
 
 .topimg {
@@ -112,12 +77,20 @@ nav a {
 	width:100%;
 	height:100%;
 }
+.mainMenuSection img {
+	width: 100%;
+}
 
-.bgColorRed { background-image: linear-gradient(0deg, #9f3224, red, #9f3224) }
-.bgColorBlue { background-image: linear-gradient(0deg, #4298cc, #3BC1EA, #4298cc) }
-.bgColorGreen { background-image: linear-gradient(0deg, #81bc00, #94C518, #81bc00) }
-.bgColorYellow { background-image: linear-gradient(0deg, #cb9f00, #FED201, #cb9f00) }
-.bgColorGray { background-image: linear-gradient(0deg, #787a79, #A6A4A4, #787a79) }
+.bgColorGradientVehicle { background-image: linear-gradient(0deg, #9f3224, red, #9f3224) }
+.bgColorGradientAircraft { background-image: linear-gradient(0deg, #4298cc, #3BC1EA, #4298cc) }
+.bgColorGradientCreature { background-image: linear-gradient(0deg, #81bc00, #94C518, #81bc00) }
+.bgColorGradientBuildings { background-image: linear-gradient(0deg, #cb9f00, #FED201, #cb9f00) }
+.bgColorGradientAbout { background-image: linear-gradient(0deg, #787a79, #A6A4A4, #787a79) }
+
+.bgColorLinearVehicle { background-color: red }
+.bgColorLinearAircraft { background-color: #3BC1EA }
+.bgColorLinearCreature { background-color: #94C518 }
+.bgColorLinearBuildings { background-color: #FED201 }
 
 
 .topMenu {
@@ -226,33 +199,59 @@ nav a {
 
 
 main {
+	margin-top:5em;
 	display: grid;
-	grid-template-columns: repeat( auto-fit, minmax(600px, 1fr) );
-	grid-gap: 1.5em;  
+	grid-template-columns: repeat( auto-fit, minmax(400px, 1fr) );
+	grid-gap: 5em;  
 }
 
-article {
-	border-radius: 40px;
-	border-color: #000;
-	background-color: #fff;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+section img {
+	max-height:60%;
+	max-width:90%;
+	margin-left:1em;
+	margin-right:1em;
+}
+section p {
+	margin-left:1em;
+	margin-right:1em;
+	font-family: 'oswaldregular';
+}
+section h2 {
+	text-align: center;
+	padding-top:1em;
+	font-family: 'oswaldregular';
 }
 
 article section {
+	height:30em;
+	border-radius: 2px;
+	border-color: #000;
+	background-color: #fff;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	position:relative;
 }
 
-.controls {
+.control{
 	position:absolute;
-	left:30;
 	bottom:0;
+	left:0;
+	width:100%;
+	background-image: url('img/lego1x1.png');
+	background-repeat: repeat;
+	background-size: 10px;
+	text-align: center;
+	font-size:2em;
+	padding-top:0.2em;
+	padding-bottom:0.1em;
+	cursor:pointer;
+	font-family: 'oswaldregular';
 }
 
 
 /* flip */
-.under { display: none }
-.turnDissapearC { animation: turnDissapear 0.5s linear forwards;}
-.turnAppearC { animation: turnAppear 0.5s linear forwards; }
+.under, .hide { display: none }
+.turnDissapearC { animation: turnDissapear 0.2s linear forwards }
+.turnAppearC { animation: turnAppear 0.2s linear forwards }
 
 @keyframes turnDissapear {
 	100% { transform: rotate3d(0, 1, 0, 90deg); }
