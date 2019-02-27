@@ -1,5 +1,5 @@
 //select DOM elements
-const template = document.querySelector("#set").content;
+const template = document.querySelector("#setTemplate").content;
 const main = document.querySelector("main");
 const nav = document.querySelector("nav");
 const allLink = document.querySelector("#all");
@@ -9,67 +9,46 @@ const closeBtn = document.querySelector(".close-btn");
 //make shortcuts to API endpoints
 const link = "https://spreadsheets.google.com/feeds/list/1RVK5ksJDyymK5QzZwrJ2KYxq5KKuAsBbbH0gmk9czps/1/public/values?alt=json";
 
-//add global eventListeners
-allLink.addEventListener("click", () => filter("all"));
-modal.addEventListener("click", () => modal.classList.add("hide"));
-closeBtn.addEventListener("click", () => modal.classList.add("hide"));
+var database = null;
 
 //define functions
 function loadJSON(link){
-	fetch(link).then(e=>e.json()).then(data=>data.feed.entry.forEach(displayLegoData));
-
+	fetch(link).then(e=>e.json()).then(data=>database = data.feed.entry);
 }
 
-function displayLegoData(brickArt){
-	//const section = document.querySelector('#' + brickArt.gsx$category.$t);
-	let section = main.querySelector('#'+brickArt.gsx$category.$t);
-	if(!section){
-		const newHeader = document.createElement("h1");
-		newHeader.textContent =brickArt.gsx$category.$t;
-		main.appendChild(newHeader);
-		section = document.createElement('section');
-		section.id=brickArt.gsx$category.$t;
-		main.appendChild(section);
-		 const a = document.createElement("a");
-        a.textContent = brickArt.gsx$category.$t;
-        a.href = "#";
-        a.addEventListener("click", ()=>filter(brickArt.gsx$category.$t));
-        nav.appendChild(a);
-		
-	}
-	let clone = template.cloneNode(true);
-	clone.querySelector("h2").textContent = brickArt.gsx$title.$t;
-
-	const img = brickArt.gsx$imagename.$t;
-	clone.querySelector("img").setAttribute("src", "photos/"+img+".jpg");
-//	clone.querySelector("p").textContent = brickArt.gsx$description.$t;
-
-	section.appendChild(clone);
-
-}
-//function for showing only the category clicked
-function filter(cat){
-   console.log(cat);
-   document.querySelectorAll("main section").forEach(section => {
-                if (section.id == cat || cat == "all") {
-                    section.style.display = "grid";
-                    section.previousElementSibling.style.display = "block";
-                } else {
-                    section.style.display = "none";
-                    section.previousElementSibling.style.display = "none";
-                }
-            })
+// add a lego set to displayed sets
+function displayLegoData(legoSet) {
+	let newSet = template.cloneNode(true);
+	newSet.querySelector('.setTitleFront').textContent = legoSet.gsx$title.$t;
+	newSet.querySelector('.setTitleBack').textContent = legoSet.gsx$title.$t;
+	newSet.querySelector('.setPicture').src = "photos/" + legoSet.gsx$imagename.$t + ".jpg";
+	newSet.querySelector("p").textContent = legoSet.gsx$description.$t;
+	main.appendChild(newSet);
 }
 
-//flip info
-function showDetails(brickArt) {
-	console.log(brickArt);
-
-	modal.querySelector("img").setAttribute("src", "photos/"+img+".jpg");
-	
-	modal.querySelector("h2").textContent = brickArt.gsx$title.$t;
-	modal.classList.remove("hide");
+//function for showing only the clicked category
+function changeCategory(cat) { 
+	while (main.firstChild) main.firstChild.remove();
+    database.forEach(legoSet => { if (legoSet.gsx$category.$t == cat) displayLegoData(legoSet) });
 }
 
+function flip(article) {
+	let currentFront = article.querySelector(".over");
+	let currentBack = article.querySelector(".under");
+	currentFront.addEventListener("animationend", function onHalfTurn(event) {
+		currentFront.removeEventListener("animationend", onHalfTurn);
+		currentFront.classList.remove("over");
+		currentFront.classList.add("under");
+		currentFront.classList.remove("turnDissapearC");
+		currentBack.addEventListener("animationend", function onFullTurn(event) { 
+			currentBack.removeEventListener("animationend", onFullTurn);
+			currentBack.classList.remove("turnAppearC");
+		});
+		currentBack.classList.add("over");
+		currentBack.classList.add("turnAppearC");
+		currentBack.classList.remove("under");
+	});
+	currentFront.classList.add("turnDissapearC");
+}
 
 loadJSON(link);
