@@ -20,7 +20,6 @@
 	.about {
 		display:block;
 	}
-
 }
 
 /* desktop  */
@@ -33,7 +32,6 @@
 	.about {
 		display:none;
 	}
-
 }
 
 button {
@@ -61,6 +59,8 @@ button {
 .mainMenuSection img {
 	width: 100%;
 }
+
+.hide { display: none }
 
 .bgColorGradientVehicle { background-image: linear-gradient(0deg, #9f3224, red, #9f3224) }
 .bgColorGradientAircraft { background-image: linear-gradient(0deg, #4298cc, #3BC1EA, #4298cc) }
@@ -230,7 +230,7 @@ article section {
 
 
 /* flip */
-.under, .hide { display: none }
+.under { display: none }
 .turnDissapearC { animation: turnDissapear 0.2s linear forwards }
 .turnAppearC { animation: turnAppear 0.2s linear forwards }
 
