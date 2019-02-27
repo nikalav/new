@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,37 +10,60 @@
 </head>
 
 <body>
-	<div class="nav">
-	    <label for="toggle">&#9776</label>
-	    <input type="checkbox" id="toggle"/>
-	    <div class="menu">
-	        <a href="index.html">HOME</a>
-	        <a href="categories.html">CATEGORIES</a>
-	        <a href="#">ABOUT US</a>
-	   </div>
+	<!--
+	<div class="wrapper">
+		<label for="toggle">&#9776</label>
+		<input type="checkbox" id="toggle" />
+		<nav>
+			<a href="#" id="all">ALL</a>
+		</nav>
+	</div>-->
 
-  </div>
+	<nav class="topMenu">
+		<div>
+			<div class="logoWrapper scaleLogo">
+				<img class="logo" src="img/logo_AllLetters.png">
+				<img class="redBlock brick" src="img/blue_block.png">
+				<img class="greenBlock brick" src="img/green_block.png">
+				<img class="yellowBlock brick" src="img/red_block.png">
+			</div>
+		</div>
+		<button id="menuHome" class="topMenuPosition topMenuSelected" data-category="Home" onclick="home()">Home</button>
+		<button id="menuCreature" class="topMenuPosition" data-category="Creature" onclick="changeCategory('Creature')">Creatures</button>
+		<button id="menuAircraft" class="topMenuPosition" data-category="Aircraft" onclick="changeCategory('Aircraft')">Aircraft</button>
+		<button id="menuVehicle" class="topMenuPosition" data-category="Vehicle" onclick="changeCategory('Vehicle')">Vehicles</button>
+		<button id="menuBuildings" class="topMenuPosition" data-category="Buildings" onclick="changeCategory('Buildings')">Buildings</button>
+		<button id="menuAbout" class="topMenuPosition" data-category="About" onclick="showAbout()">About Us</button>
+	</nav>
+
+	<nav class="mainMenu">
+		<div class="mainMenuSection" data-category="Creature" onclick="changeCategory('Creature')"><div class="gradient bgColorGradientCreature"></div><img src='img/creatures_graphic_txt.png'/></div>
+		<div class="mainMenuSection" data-category="Aircraft" onclick="changeCategory('Aircraft')"><div class="gradient bgColorGradientAircraft"></div><img src='img/aircraft_graphic_txt.png'/></div>
+		<div class="mainMenuSection" data-category="Buildings" onclick="changeCategory('Buildings')"><div class="gradient bgColorGradientBuildings"></div><img src='img/buildings_graphic_txt.png'/></div>
+		<div class="mainMenuSection" data-category="Vehicle" onclick="changeCategory('Vehicle')"><div class="gradient bgColorGradientVehicle"></div><img src='img/vehicles_graphic_txt.png'/></div>
+		<div class="mainMenuSection about" data-category="About" onclick="showAbout()"><div class="gradient bgColorGradientAbout"></div><img src='img/about_graphic_txt.png'/></div>
+	</nav>
+
 	<main>
 	</main>
-	<div class="model-bg hide">
-		<article class="model-content">
-			<button class="close-btn">x</button>
-			<h2>Title</h2>
-			<img src="photos/">
-		</article>
-	</div>
-	<template id="set">
+
+	<template id="setTemplate">
 		<article>
-			<h2>Title</h2>
-			<img src="photos/">
-			<button id="seeMore">See more</button>
+			<section class="over">
+				<h2 class="setTitleFront">TITLE</h2>
+				<img class="setPicture" src="">
+				<div class="control" onclick="flip(this.parentElement.parentElement)">Learn More</div>
+			</section>	
+			<section class="under">
+				<h2 class="setTitleBack">TITLE</h2>
+				<p class="setDescription">DESCRIPTION</p>
+			    <div class="control" onclick="flip(this.parentElement.parentElement)">Back</div>
+			</section>	
 		</article>
 	</template>
-
-
-
 
 	<script src="script.js"></script>
 </body>
 
 </html>
+

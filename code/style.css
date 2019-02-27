@@ -1,4 +1,23 @@
 
+@font-face {
+    font-family: 'oswaldregular';
+    src: url('fonts/oswald-regular-webfont.eot');
+    src: url('fonts/oswald-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/oswald-regular-webfont.woff2') format('woff2'),
+         url('fonts/oswald-regular-webfont.woff') format('woff'),
+         url('fonts/oswald-regular-webfont.ttf') format('truetype'),
+         url('fonts/oswald-regular-webfont.svg#oswaldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* phone  */
+@media (max-width:1000px){
+	body {
+		margin:0;
+	}
+
 .close-btn {
 	float: right;
 	border-radius: 1em;
@@ -28,71 +47,84 @@ button {
 	background-color: rgba(0, 0, 0, .8);
 }
 
-.model-content {
-	width: 80%;
-	height: 80%;
-	margin: auto;
-	margin-top: 5%;
+	.about {
+		display:block;
+	}
 }
 
-.overlay {
-	color: aliceblue;
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	padding: 0.7em;
-	background-color: red;
-	text-align: center;
-}
-/*// Styling main content //*/
-
-header {
-	min-height: 100px;
-	height: 230px;
-}
-
-html,
-body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
+/* desktop  */
+@media (min-width:1000px){
+	body {
+		margin-left:5vw;
+		margin-right:5vw;
+	}
 
 }
 
-section {
+button {
+	cursor: pointer;
+}
+
+.mainMenu {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	grid-gap: 1.3em;
-	grid-row-gap: 1em;
-	margin-right: 10px;
+    grid-template-columns: repeat( auto-fit, minmax(600px, 1fr) );
 }
 
-article {
-	margin-left: 1em;
+.mainMenuSection {
+	width:100%;
 	position: relative;
-	padding: 1em;
-	border-color: #000;
-	background-color: #fff;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+	background-image: url('img/lego1x1.png');
+	background-repeat: repeat;
+	background-size: 10px;
 }
-
-h1 {
-	text-align: center;
-	margin-top: 10%;
-	margin-bottom: 3%;
-	font-size: 50px;
+.gradient {
+	position:absolute;
+	z-index:-1000;
+	width:100%;
+	height:100%;
 }
-
-h2 {
-	text-align: center;
-}
-
-img {
+.mainMenuSection img {
 	width: 100%;
 }
 
+
+.hide { display: none }
+
+.bgColorGradientVehicle { background-image: linear-gradient(0deg, #9f3224, red, #9f3224) }
+.bgColorGradientAircraft { background-image: linear-gradient(0deg, #4298cc, #3BC1EA, #4298cc) }
+.bgColorGradientCreature { background-image: linear-gradient(0deg, #81bc00, #94C518, #81bc00) }
+.bgColorGradientBuildings { background-image: linear-gradient(0deg, #cb9f00, #FED201, #cb9f00) }
+.bgColorGradientAbout { background-image: linear-gradient(0deg, #787a79, #A6A4A4, #787a79) }
+
+.bgColorLinearVehicle { background-color: red }
+.bgColorLinearAircraft { background-color: #3BC1EA }
+.bgColorLinearCreature { background-color: #94C518 }
+.bgColorLinearBuildings { background-color: #FED201 }
+
+
+.topMenu {
+	height: 2em;
+	display:grid;
+	grid-template-columns: 5fr 5em 7em 6em 6em 6em 6em;
+	grid-gap: 1em;
+	margin-top:3em;
+	margin-bottom:3em;
+}
+.topMenuPosition {
+	padding-top:0.3em;
+	padding-bottom:0.3em;
+	font-family: 'oswaldregular';
+	font-size:1.5em;
+	float:right;
+	background:none;
+	border:none;
+}
+.topMenuPosition:hover,
+.topMenuSelected  {
+	border-radius: 2em;
+	background-color:black;
+	color:white;
+  
 .hide {
 	display: none;
 }
@@ -164,6 +196,7 @@ nav a {
     text-align: center;
 }
 
+
 /*// Animating Logo //*/
 
 :root {
@@ -185,10 +218,8 @@ nav a {
 
 .logoWrapper {
 	float: left;
-	top: var(--topMargin);
 	max-width: 100%;
-	margin-left: 10px;
-	/*	transform: scale(0.8);  */
+	transform: scale(0.3); 
 	/* to scale the logo animation */
 	position: relative;
 }
@@ -209,9 +240,7 @@ nav a {
 }
 
 @keyframes redDrop {
-	from {
-		top: -100px;
-	}
+	from {	top: -300px; }
 }
 
 .greenBlock {
@@ -225,11 +254,8 @@ nav a {
 }
 
 @keyframes greenDrop {
-	from {
-		top: -100px;
-	}
+	from { top: -300px;	}
 }
-
 
 .yellowBlock {
 	left: 172px;
@@ -242,18 +268,12 @@ nav a {
 }
 
 @keyframes yellowDrop {
-	0% {
-		top: -100px;
-	}
-
+	0% { top: -300px; }
 	70% {
 		top: 4px;
 		transform: rotate(0deg)
 	}
-
-	100% {
-		transform: rotate(16deg)
-	}
+	100% { transform: rotate(16deg)	}
 }
 
 
@@ -271,11 +291,71 @@ nav a {
 }
 
 @keyframes fadein {
-	from {
-		opacity: 0;
-	}
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
 
-	to {
-		opacity: 1;
-	}
+
+main {
+	margin-top:5em;
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax(400px, 1fr) );
+	grid-gap: 5em;  
+}
+
+section img {
+	max-height:60%;
+	max-width:90%;
+	margin-left:1em;
+	margin-right:1em;
+}
+section p {
+	margin-left:1em;
+	margin-right:1em;
+	font-family: 'oswaldregular';
+}
+section h2 {
+	text-align: center;
+	padding-top:1em;
+	font-family: 'oswaldregular';
+}
+
+article section {
+	height:30em;
+	border-radius: 2px;
+	border-color: #000;
+	background-color: #fff;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	position:relative;
+}
+
+.control{
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	background-image: url('img/lego1x1.png');
+	background-repeat: repeat;
+	background-size: 10px;
+	text-align: center;
+	font-size:2em;
+	padding-top:0.2em;
+	padding-bottom:0.1em;
+	cursor:pointer;
+	font-family: 'oswaldregular';
+}
+
+
+/* flip */
+.under { display: none }
+.turnDissapearC { animation: turnDissapear 0.2s linear forwards }
+.turnAppearC { animation: turnAppear 0.2s linear forwards }
+
+@keyframes turnDissapear {
+	100% { transform: rotate3d(0, 1, 0, 90deg); }
+}
+						
+@keyframes turnAppear {
+	0% { transform: rotate3d(0, 1, 0, 90deg); }
+	100% { transform: rotate3d(0, 1, 0, 0deg); }
 }

@@ -1,64 +1,87 @@
+
 //select DOM elements
-const template = document.querySelector("#set").content;
+const template = document.querySelector("#setTemplate").content;
 const main = document.querySelector("main");
+
+//make shortcuts to API endpoints
+const link = "https://spreadsheets.google.com/feeds/list/1RVK5ksJDyymK5QzZwrJ2KYxq5KKuAsBbbH0gmk9czps/1/public/values?alt=json";
+
+var database;
+
+//define functions
+function loadJSON(link){
+	fetch(link).then(e=>e.json()).then(data=>database = data.feed.entry); // load JSON and save it in the 'database' variable
+}
+
+// add a lego set to displayed sets
+function displayLegoData(legoSet) {
+	let newSet = template.cloneNode(true); // clone the template and set all the fields
+	newSet.querySelector('.setTitleFront').textContent = legoSet.gsx$title.$t;
+	newSet.querySelector('.setTitleBack').textContent = legoSet.gsx$title.$t;
+	newSet.querySelector('.setPicture').src = "photos/" + legoSet.gsx$imagename.$t + ".jpg";
+	newSet.querySelector("p").textContent = legoSet.gsx$description.$t;
+	newSet.querySelectorAll(".control").forEach(control => control.classList.add("bgColorLinear" + legoSet.gsx$category.$t)); // set appropriate flipping buttons color
+	main.appendChild(newSet);
+}
+
+//function for showing only the clicked category
+function changeCategory(cat) { 
+	document.querySelectorAll(".topMenuPosition").forEach(menuPosition => { // find the top menu position of the selected class and mark it as 'selected'
+		if (menuPosition.dataset.category == cat) menuPosition.classList.add("topMenuSelected") 
+		else menuPosition.classList.remove("topMenuSelected")
+	});
+	document.querySelectorAll(".mainMenuSection").forEach(menuSection => { // hide all the tiles in the tile menu but the one we selected
+		if (menuSection.dataset.category == cat) menuSection.classList.remove("hide") 
+		else menuSection.classList.add("hide")
+	});
+	while (main.firstChild) main.firstChild.remove(); // remove all content from any category that was selected previously
+    database.forEach(legoSet => { if (legoSet.gsx$category.$t == cat) displayLegoData(legoSet) }); // display entries from the database that match the selected category 
+}
+
+function flip(article) {
+	let currentFront = article.querySelector(".over"); // the section that is currently on top
+	let currentBack = article.querySelector(".under"); // the section that is currently hidden
+	currentFront.addEventListener("animationend", function onHalfTurn(event) { // this event listener will activate after 'currentFront' is rotated 90 degrees
+		currentFront.removeEventListener("animationend", onHalfTurn); // remove the function from the currentFront
+		currentFront.classList.remove("over"); // it is no longer 'over' 
+		currentFront.classList.add("under"); // now it is hidden
+		currentFront.classList.remove("turnDissapearC"); // remove animation class
+		currentBack.addEventListener("animationend", function onFullTurn(event) {  // add event listener which will activate upon complete flip, to do cleanup
+			currentBack.removeEventListener("animationend", onFullTurn);  // remove event handler
+			currentBack.classList.remove("turnAppearC"); // remove animation class
+		});
+		currentBack.classList.add("over"); // 'currentBack' is the new top section 
+		currentBack.classList.add("turnAppearC"); // add animation to turn it from 90 degrees to 0
+		currentBack.classList.remove("under"); // remove 'under' - now it is visible
+	});
+	currentFront.classList.add("turnDissapearC"); // start the flip animation 
+}
+
+function home() {
+	document.querySelectorAll(".mainMenuSection").forEach(menuSection => menuSection.classList.remove("hide")); // show all the tiles in the tile menu
+	document.querySelectorAll(".topMenuPosition").forEach(menuPosition => { // mark 'home' as selected and all others as not selected
+		if (menuPosition.dataset.category == 'Home') menuPosition.classList.add("topMenuSelected") 
+		else menuPosition.classList.remove("topMenuSelected")
+	});
+	while (main.firstChild) main.firstChild.remove(); // remove all the content entries, as they are not on the home page
+}
+
+loadJSON(link);
+=======
+//select DOM elements
 const nav = document.querySelector("nav");
 const allLink = document.querySelector("#all");
 const modal = document.querySelector(".model-bg");
 const closeBtn = document.querySelector(".close-btn");
 
-//make shortcuts to API endpoints
-const link = "https://spreadsheets.google.com/feeds/list/1RVK5ksJDyymK5QzZwrJ2KYxq5KKuAsBbbH0gmk9czps/1/public/values?alt=json";
+
 
 //add global eventListeners
 allLink.addEventListener("click", () => filter("all"));
 modal.addEventListener("click", () => modal.classList.add("hide"));
 closeBtn.addEventListener("click", () => modal.classList.add("hide"));
 
-//define functions
-function loadJSON(link){
-	fetch(link).then(e=>e.json()).then(data=>data.feed.entry.forEach(displayLegoData));
 
-}
-
-
-function displayLegoData(brickArt){
-	let section = main.querySelector('#'+brickArt.gsx$category.$t);
-	if(!section){
-		section = document.createElement('section');
-		section.id=brickArt.gsx$category.$t;
-		main.appendChild(section);
-
-        const a = document.createElement("a");
-        a.textContent = brickArt.gsx$category.$t;
-        a.href = "#";
-        a.addEventListener("click", ()=>filter(brickArt.gsx$category.$t));
-        nav.appendChild(a);
-
-		
-	}
-	let clone = template.cloneNode(true);
-	clone.querySelector("h2").textContent = brickArt.gsx$title.$t;
-
-
-	const img = brickArt.gsx$imagename.$t;
-	clone.querySelector("img").setAttribute("src", "photos/"+img+".png");
-	clone.querySelector("button").addEventListener("click", ()=>showDetails((brickArt)));
-//	clone.querySelector("p").textContent = brickArt.gsx$description.$t;
-
-	section.appendChild(clone);
-
-}
-//card flip
-function showDetails(brickArt) {
-	console.log(brickArt);
-
-	modal.querySelector("img").setAttribute("src", "photos/"+brickArt.gsx$imagename.$t+".png");
-
-	modal.querySelector("h2").textContent = brickArt.gsx$title.$t;
-	modal.classList.remove("hide");
-
-
-}
 
 //function for showing only the category clicked
 function filter(cat){
@@ -72,5 +95,3 @@ function filter(cat){
             })
 }
 
-
-loadJSON(link);
