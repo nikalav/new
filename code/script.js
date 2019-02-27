@@ -20,25 +20,25 @@ function loadJSON(link){
 
 }
 
+
 function displayLegoData(brickArt){
-	//const section = document.querySelector('#' + brickArt.gsx$category.$t);
 	let section = main.querySelector('#'+brickArt.gsx$category.$t);
 	if(!section){
-		const newHeader = document.createElement("h1");
-		newHeader.textContent =brickArt.gsx$category.$t;
-		main.appendChild(newHeader);
 		section = document.createElement('section');
 		section.id=brickArt.gsx$category.$t;
 		main.appendChild(section);
-		 const a = document.createElement("a");
+
+        const a = document.createElement("a");
         a.textContent = brickArt.gsx$category.$t;
         a.href = "#";
         a.addEventListener("click", ()=>filter(brickArt.gsx$category.$t));
         nav.appendChild(a);
+
 		
 	}
 	let clone = template.cloneNode(true);
 	clone.querySelector("h2").textContent = brickArt.gsx$title.$t;
+
 
 	const img = brickArt.gsx$imagename.$t;
 	clone.querySelector("img").setAttribute("src", "photos/"+img+".png");
@@ -59,16 +59,15 @@ function showDetails(brickArt) {
 
 
 }
+
 //function for showing only the category clicked
 function filter(cat){
-   console.log(cat);
+   //console.log(cat);
    document.querySelectorAll("main section").forEach(section => {
-                if (section.id == cat || cat == "all") {
-                    section.style.display = "grid";
-                    section.previousElementSibling.style.display = "block";
+                if (section.id == cat) {
+                    section.classList.remove('hide');
                 } else {
-                    section.style.display = "none";
-                    section.previousElementSibling.style.display = "none";
+                    section.classList.add('hide');
                 }
             })
 }
