@@ -1,19 +1,9 @@
 //select DOM elements
-const nav = document.querySelector("nav");
-const allLink = document.querySelector("#all");
-const modal = document.querySelector(".model-bg");
-const closeBtn = document.querySelector(".close-btn");
-
-
-
-//add global eventListeners
-allLink.addEventListener("click", () => filter("all"));
-modal.addEventListener("click", () => modal.classList.add("hide"));
-closeBtn.addEventListener("click", () => modal.classList.add("hide"));
-
-//select DOM elements
 const template = document.querySelector("#setTemplate").content;
 const main = document.querySelector("main");
+const burgerToggle = document.querySelector(".burgerToggle");
+const about = document.querySelector(".about");
+const aboutInfo = document.querySelector(".aboutInfo");
 
 //make shortcuts to API endpoints
 const link = "https://spreadsheets.google.com/feeds/list/1RVK5ksJDyymK5QzZwrJ2KYxq5KKuAsBbbH0gmk9czps/1/public/values?alt=json";
@@ -47,7 +37,10 @@ function changeCategory(cat) {
 		else menuSection.classList.add("hide")
 	});
 	while (main.firstChild) main.firstChild.remove(); // remove all content from any category that was selected previously
-    database.forEach(legoSet => { if (legoSet.gsx$category.$t == cat) displayLegoData(legoSet) }); // display entries from the database that match the selected category 
+	database.forEach(legoSet => { if (legoSet.gsx$category.$t == cat) displayLegoData(legoSet) }); // display entries from the database that match the selected category 
+	about.classList.remove("showAboutTile"); // if about was displayed, hide it
+	aboutInfo.classList.add("hide");
+	burgerToggle.classList.remove('burgerToggleShow');
 }
 
 function flip(article) {
@@ -70,6 +63,8 @@ function flip(article) {
 }
 
 function home() {
+	about.classList.remove("showAboutTile"); // if about was displayed, hide it
+	aboutInfo.classList.add("hide");
 	document.querySelectorAll(".mainMenuSection").forEach(menuSection => menuSection.classList.remove("hide")); // show all the tiles in the tile menu
 	document.querySelectorAll(".topMenuPosition").forEach(menuPosition => { // mark 'home' as selected and all others as not selected
 		if (menuPosition.dataset.category == 'Home') menuPosition.classList.add("topMenuSelected") 
@@ -78,7 +73,14 @@ function home() {
 	while (main.firstChild) main.firstChild.remove(); // remove all the content entries, as they are not on the home page
 }
 
+function showAbout() {
+	changeCategory("About");
+	aboutInfo.classList.remove("hide");
+	about.classList.add("showAboutTile");
+}
+
+function toggleMenu() {
+	burgerToggle.classList.toggle('burgerToggleShow');
+}
+
 loadJSON(link);
-
-
-

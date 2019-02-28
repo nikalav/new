@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,30 +9,27 @@
 </head>
 
 <body>
-	<!--
-	<div class="wrapper">
-		<label for="toggle">&#9776</label>
-		<input type="checkbox" id="toggle" />
-		<nav>
-			<a href="#" id="all">ALL</a>
-		</nav>
-	</div>-->
 
 	<nav class="topMenu">
+		<div class="mobileMenuVisible"><button id="burger" onclick="toggleMenu()">&#9776</button></div>
 		<div>
-			<div class="logoWrapper scaleLogo">
-				<img class="logo" src="img/logo_AllLetters.png">
+			<div class="logoWrapper scaleLogo" onclick="home()">
+				<img class="logo topMenuVisible" src="img/logo_AllLetters.png">
 				<img class="redBlock brick" src="img/blue_block.png">
 				<img class="greenBlock brick" src="img/green_block.png">
 				<img class="yellowBlock brick" src="img/red_block.png">
 			</div>
 		</div>
-		<button id="menuHome" class="topMenuPosition topMenuSelected" data-category="Home" onclick="home()">Home</button>
-		<button id="menuCreature" class="topMenuPosition" data-category="Creature" onclick="changeCategory('Creature')">Creatures</button>
-		<button id="menuAircraft" class="topMenuPosition" data-category="Aircraft" onclick="changeCategory('Aircraft')">Aircraft</button>
-		<button id="menuVehicle" class="topMenuPosition" data-category="Vehicle" onclick="changeCategory('Vehicle')">Vehicles</button>
-		<button id="menuBuildings" class="topMenuPosition" data-category="Buildings" onclick="changeCategory('Buildings')">Buildings</button>
-		<button id="menuAbout" class="topMenuPosition" data-category="About" onclick="showAbout()">About Us</button>
+		<div class="burgerToggle">
+			<div class="topMenuPositions">
+				<button class="topMenuPosition topMenuSelected" data-category="Home" onclick="home()">Home</button>
+				<button class="topMenuPosition" data-category="Creature" onclick="changeCategory('Creature')">Creatures</button>
+				<button class="topMenuPosition" data-category="Aircraft" onclick="changeCategory('Aircraft')">Aircraft</button>
+				<button class="topMenuPosition" data-category="Vehicle" onclick="changeCategory('Vehicle')">Vehicles</button>
+				<button class="topMenuPosition" data-category="Buildings" onclick="changeCategory('Buildings')">Buildings</button>
+				<button class="topMenuPosition" data-category="About" onclick="showAbout()">About Us</button>
+			</div>
+		</div>
 	</nav>
 
 	<nav class="mainMenu">
@@ -47,6 +43,10 @@
 	<main>
 	</main>
 
+	<div class="aboutInfo hide">
+			BrickArt is the home to different and unique constructions from lego bricks! Our mission is to present that LEGO is not only child's play, but a tool for imagination going wild at all ages. LEGO is so intrinsically fun and whimsical, the toy can reflects persons personality well; it's structured and organized and logical, but silly and playful. What better medium than a primary-colored children's toy based on straight lines, rules, and math? The name 'LEGO' is an abbreviation of the two Danish words "leg godt", meaning "play well". It’s their name and it’s their ideal. It has come a long way over the past almost 80 years - from a small carpenter’s workshop to a modern, global enterprise that is now one of the world’s largest manufacturers of toys. The brick in its present form was launched in 1958. The interlocking principle with its tubes makes it unique and offers unlimited building possibilities. It's just a matter of getting the imagination going – and letting a wealth of creative ideas emerge through play!
+	</div>
+	
 	<template id="setTemplate">
 		<article>
 			<section class="over">
@@ -66,4 +66,3 @@
 </body>
 
 </html>
-
